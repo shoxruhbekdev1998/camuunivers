@@ -14,9 +14,8 @@ class Inquiries(Base):
     student_name = Column(String(50), nullable=True)
     student_surname = Column(String(50), nullable=True)
     student_number = Column(String(50), nullable=True)
-    
-    student_request = Column(String(300), nullable=True)
-    student_direct = Column(String(50), default=True)
+    student_direct = Column(String(50), default=True)  # yo'nalishlarni tanlay oladi
+    student_request = Column(String(300), nullable=True) #savollar bera oladi
     student_confirm = Column(String(50), default=True)
     
     date = Column(Date(),nullable = True,default=func.now())
