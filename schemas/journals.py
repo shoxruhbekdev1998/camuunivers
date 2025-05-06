@@ -14,6 +14,7 @@ class JournalBase(BaseModel):
 
     title_tr: Optional[str] = None
     description_tr: Optional[str] = None
+    category_id : int
 
     file_path: Optional[str] = None  # Saqlangan PDF fayl manzili
     image: Optional[str] = None      # Saqlangan muqova rasmi manzili

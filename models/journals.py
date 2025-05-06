@@ -22,4 +22,8 @@ class Journal(Base):
     file_path = Column(String, nullable=False)  # PDF file yo‘li
     image = Column(String, nullable=True)  # Muqova rasmi yo‘li
 
+    category_id = Column(Integer, ForeignKey("Categories.id"), nullable=True)
+
     time = Column(Date(), nullable=True, default=func.now())
+
+    category = relationship("Categories", back_populates="journal")

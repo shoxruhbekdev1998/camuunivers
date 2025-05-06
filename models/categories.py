@@ -28,3 +28,5 @@ class Categories(Base):
     category2 = relationship("Categories2", back_populates="category") #category2 dan oladi
 
     information = relationship("Informations", back_populates="category") # information dan oladi
+
+    journal = relationship("Journal", back_populates="category")

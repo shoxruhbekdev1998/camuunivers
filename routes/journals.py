@@ -18,6 +18,7 @@ async def create_journal_route(
     description_en: str = Form(None),
     title_tr: str = Form(None),
     description_tr: str = Form(None),
+    category_id: int = Form(None),
     file: Optional[UploadFile] = File(None),
     image: Optional[UploadFile] = File(None),
     db: Session = Depends(get_db)
@@ -31,6 +32,7 @@ async def create_journal_route(
         description_en=description_en,
         title_tr=title_tr,
         description_tr=description_tr,
+        category_id=category_id
     )
     return create_journal(db=db, data=data, file=file, image=image)
 
@@ -59,6 +61,7 @@ async def update_journal_route(
     title_tr: Optional[str] = Form(None),
     description_tr: Optional[str] = Form(None),
     file: Optional[UploadFile] = File(None),
+    category_id: Optional[int] = Form(None),
     image: Optional[UploadFile] = File(None),
     db: Session = Depends(get_db)
 ):
@@ -71,6 +74,7 @@ async def update_journal_route(
         description_en=description_en,
         title_tr=title_tr,
         description_tr=description_tr,
+        category_id=category_id
     )
     return update_journal(id=id, db=db, form=form, file=file, image=image)
 

@@ -49,7 +49,8 @@ def create_journal(
         title_tr=data.title_tr,
         description_tr=data.description_tr,
         file_path=pdf_filename,
-        image=image_filename
+        image=image_filename,
+        category_id =data.category_id
     )
 
     db.add(journal)
@@ -83,6 +84,7 @@ def get_all_journals(
             "description_en": item.description_en,
             "title_tr": item.title_tr,
             "description_tr": item.description_tr,
+            "category_id": item.category_id,
             "file_path": clean_path(item.file_path, "journals/pdfs"),
             "image": clean_path(item.image, "journals/images"),
             "date": item.time
@@ -91,7 +93,6 @@ def get_all_journals(
     result["data"] = formatted_data
     return result
 
-# ✅ UPDATE
 def update_journal(
     id: int,
     db: Session,
@@ -103,16 +104,32 @@ def update_journal(
     if not journal:
         raise HTTPException(status_code=404, detail="Journal topilmadi.")
 
+    # Eski fayllarni o'chirish
     if file:
+        if journal.file_path:
+            old_file_path = os.path.join(UPLOAD_PDF_DIR, journal.file_path)
+            if os.path.exists(old_file_path):
+                os.remove(old_file_path)
         journal.file_path = save_file(file, UPLOAD_PDF_DIR)
+
     if image:
+        if journal.image:
+            old_image_path = os.path.join(UPLOAD_IMG_DIR, journal.image)
+            if os.path.exists(old_image_path):
+                os.remove(old_image_path)
         journal.image = save_file(image, UPLOAD_IMG_DIR)
 
+    # Form ma'lumotlarini yangilash
     for field, value in form.dict(exclude_unset=True).items():
         setattr(journal, field, value)
 
     db.commit()
     db.refresh(journal)
+
+    # Tozalangan yo'llarni qaytarish
+    journal.file_path = clean_path(journal.file_path, "journals/pdfs")
+    journal.image = clean_path(journal.image, "journals/images")
+
     return journal
 
 # ✅ DELETE
