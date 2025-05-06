@@ -1,13 +1,14 @@
 from fastapi import HTTPException
 
 from models.menus import Menus
+from models.categories import Categories
 from routes.auth import get_password_hash
 from utils.pagination import pagination
 from sqlalchemy.orm import joinedload
 
 
 def all_menus(search,id,from_date,end_date,page,limit,db,status):
-    menus = db.query(Menus).options(joinedload(Menus.category)).filter(Menus.id >= 0)
+    menus = db.query(Menus).options(joinedload(Menus.category).joinedload(Categories.category2)).filter(Menus.id >= 0)
     if search:
           menus= menus.filter(Menus.name_uz.like(search)|
                               Menus.name_en.like(search)|
