@@ -6,7 +6,7 @@ from utils.pagination import pagination
 from sqlalchemy.orm import joinedload
 
 def all_categories(search,id,menu_id,from_date,end_date,page,limit,db,status):
-    categories = db.query(Categories).options(joinedload(Categories.category2),joinedload(Categories.information)).filter(Categories.id >= 0)
+    categories = db.query(Categories).options(joinedload(Categories.category2),joinedload(Categories.information),joinedload(Categories.journal)).filter(Categories.id >= 0)
     if search:
           categories = categories.filter(Categories.name_uz.like(search)|
                               Categories.name_en.like(search)|

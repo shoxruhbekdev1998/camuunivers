@@ -29,4 +29,4 @@ class Categories(Base):
 
     information = relationship("Informations", back_populates="category") # information dan oladi
 
-    journal = relationship("Journal", back_populates="category")
+    journal = relationship("Journals", back_populates="category") # journaldan olishi kerak

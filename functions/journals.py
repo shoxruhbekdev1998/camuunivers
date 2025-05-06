@@ -3,7 +3,7 @@ from uuid import uuid4
 from fastapi import UploadFile, HTTPException
 from sqlalchemy.orm import Session
 from typing import Optional, List
-from models.journals import Journal
+from models.journals import Journals
 from schemas.journals import JournalCreate, JournalUpdate
 from utils.pagination import pagination
 
@@ -39,7 +39,7 @@ def create_journal(
     pdf_filename = save_file(file, UPLOAD_PDF_DIR)
     image_filename = save_file(image, UPLOAD_IMG_DIR)
 
-    journal = Journal(
+    journal = Journals(
         title_uz=data.title_uz,
         description_uz=data.description_uz,
         title_ru=data.title_ru,
@@ -65,10 +65,10 @@ def get_all_journals(
     page: int = 1,
     limit: int = 10
 ):
-    query = db.query(Journal)
+    query = db.query(Journals)
 
     if search:
-        query = query.filter(Journal.title_uz.ilike(f"%{search}%"))
+        query = query.filter(Journals.title_uz.ilike(f"%{search}%"))
 
     result = pagination(form=query, page=page, limit=limit)
 
@@ -100,7 +100,7 @@ def update_journal(
     file: Optional[UploadFile],
     image: Optional[UploadFile]
 ):
-    journal = db.query(Journal).filter(Journal.id == id).first()
+    journal = db.query(Journals).filter(Journals.id == id).first()
     if not journal:
         raise HTTPException(status_code=404, detail="Journal topilmadi.")
 
@@ -134,7 +134,7 @@ def update_journal(
 
 # ✅ DELETE
 def delete_journal(db: Session, journal_id: int):
-    journal = db.query(Journal).filter(Journal.id == journal_id).first()
+    journal = db.query(Journals).filter(Journals.id == journal_id).first()
     if journal:
         db.delete(journal)
         db.commit()

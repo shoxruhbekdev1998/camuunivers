@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String, Boolean, Text, Date, func, Forei
 from sqlalchemy.orm import relationship
 from db import Base
 
-class Journal(Base):
+class Journals(Base):
     __tablename__ = "Journals"
 
     id = Column(Integer, primary_key=True, index=True)
