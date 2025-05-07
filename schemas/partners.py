@@ -8,6 +8,7 @@ class PartnerBase(BaseModel):
     partner_link : Optional[str] = None
 
     logo : Optional[str] = None
+    page : str
     
 
 

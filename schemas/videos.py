@@ -9,6 +9,7 @@ class VideoBase(BaseModel):
     videos_ru: Optional[str]
     videos_tr: Optional[str]
     videos_link: Optional[str]
+    page : str
     status: bool
 
 

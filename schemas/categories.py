@@ -7,6 +7,7 @@ class CategoriesBase(BaseModel):
     name_ru : str
     name_tr : str
     menu_id : int
+    page : str
 
 class CategoriesCreate(CategoriesBase):
     pass

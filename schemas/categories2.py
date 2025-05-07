@@ -6,6 +6,7 @@ class Categories2Base(BaseModel):
     name_en : str
     name_ru : str
     name_tr : str
+    page : str
 
     category_id : int
 

@@ -11,7 +11,7 @@ class Categories2(Base):
     name_en = Column(String(50), nullable=True)
     name_ru = Column(String(50), nullable=True)
     name_tr = Column(String(50), nullable=True)
-    
+    page = Column(String(50), nullable=True)
     date = Column(Date(), nullable=True, default=func.now())
     status = Column(Boolean, nullable=True, default=True)
     

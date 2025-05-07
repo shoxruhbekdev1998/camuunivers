@@ -41,6 +41,7 @@ def add_inquiries(form,db):
                             student_number=form.student_number,
                             student_direct=form.student_direct,
                             student_request=form.student_request,
+                            page = form.page,
                             student_confirm=form.student_confirm)
     db.add(new_inquiries)
     db.commit()
@@ -58,6 +59,7 @@ def update_inquiries(id,form,db):
         Inquiries.student_direct:form.student_direct,
         Inquiries. student_request:form. student_request,
         Inquiries.student_confirm:form.student_confirm,
+        Inquiries.page:form.page,
         Inquiries.status:form.status,
 
     })

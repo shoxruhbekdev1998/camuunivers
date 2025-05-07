@@ -48,6 +48,7 @@ def create_journal(
         description_en=data.description_en,
         title_tr=data.title_tr,
         description_tr=data.description_tr,
+        page=data.page,
         file_path=pdf_filename,
         image=image_filename,
         category_id =data.category_id
@@ -84,6 +85,7 @@ def get_all_journals(
             "description_en": item.description_en,
             "title_tr": item.title_tr,
             "description_tr": item.description_tr,
+            "page": item.page,
             "category_id": item.category_id,
             "file_path": clean_path(item.file_path, "journals/pdfs"),
             "image": clean_path(item.image, "journals/images"),

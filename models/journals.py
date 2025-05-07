@@ -19,6 +19,8 @@ class Journals(Base):
     title_tr = Column(String, nullable=False)
     description_tr = Column(Text)
 
+    page = Column(String(50), nullable=True)
+
     file_path = Column(String, nullable=False)  # PDF file yo‘li
     image = Column(String, nullable=True)  # Muqova rasmi yo‘li
 

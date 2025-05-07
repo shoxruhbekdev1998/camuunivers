@@ -42,6 +42,7 @@ def create_information(db: Session, data: InformationCreate, files: List[Optiona
         information_tr=data.information_tr,
         video_url=data.video_url,
         category_id = data.category_id,
+        page = data.page,
         status=True  # yoki kerakli default status
     )
 
@@ -105,6 +106,7 @@ def get_all_informations(search: str = None,
             "information_tr": info.information_tr,
             "video_url": info.video_url,
             "category_id": info.category_id,
+            "page": info.page,
             "status": info.status,
             "date": info.date,
             **photos
@@ -135,6 +137,7 @@ def update_information(id: int, form: InformationUpdate, files: List[Optional[Up
         Informations.information_tr: form.information_tr,
         Informations.video_url: form.video_url,
         Informations.category_id: form.category_id,
+        Informations.page: form.page,
         Informations.status: form.status,
     }
 

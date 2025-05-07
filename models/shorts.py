@@ -18,6 +18,8 @@ class Shorts(Base):
     
     shorts_link = Column(String,nullable=True)
 
+    page = Column(String(50), nullable=True)
+
     date = Column(Date(),nullable = True,default=func.now())
     status = Column(Boolean, nullable = True ,default=True)
 

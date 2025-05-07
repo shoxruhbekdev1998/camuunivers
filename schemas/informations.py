@@ -14,6 +14,7 @@ class InformationBase(BaseModel):
 
     title_tr: Optional[str] = None
     information_tr: Optional[str] = None
+    page : str
 
     category_id : int
 

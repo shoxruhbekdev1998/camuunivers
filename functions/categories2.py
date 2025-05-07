@@ -43,6 +43,7 @@ def add_categories2(form,db):
                               name_en=form.name_en,
                               name_ru=form.name_ru,
                               name_tr=form.name_tr,
+                              page = form.page,
                               category_id=form.category_id,)
     db.add(new_category2)
     db.commit()
@@ -59,6 +60,7 @@ def update_categories2(id, form, db):
         Categories2.name_en: form.name_en,
         Categories2.name_ru: form.name_ru,
         Categories2.name_tr: form.name_tr,
+        Categories2.page: form.page,
         Categories2.category_id: form.category_id,
         Categories2.status: form.status,
     })

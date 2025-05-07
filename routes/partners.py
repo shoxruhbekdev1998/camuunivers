@@ -18,6 +18,7 @@ router_partner = APIRouter()
 async def create_partner_route(
     partner_name: str = Form(None),
     partner_link: str = Form(None),
+    page: Optional[str] = Form(None),
     status: bool = Form(...),
     partner_logo: Optional[UploadFile] = File(None),
     db: Session = Depends(get_db)
@@ -25,6 +26,7 @@ async def create_partner_route(
     data = PartnerCreate(
         partner_name=partner_name,
         partner_link=partner_link,
+        page=page,
         
     )
     return create_partner(db=db, data=data, file=partner_logo)
@@ -52,13 +54,15 @@ async def update_partner_route(
     id: int = Form(...),
     partner_name: str = Form(None),
     partner_link: str = Form(None),
+    page: Optional[str] = Form(None),
    
     partner_logo: Optional[UploadFile] = File(None),
     db: Session = Depends(get_db)
 ):
     data = PartnerUpdate(
         partner_name=partner_name,
-        partner_link=partner_link
+        partner_link=partner_link,
+        page=page,
         
     )
     return update_partner(db=db, data=data, partner_id=id, file=partner_logo)

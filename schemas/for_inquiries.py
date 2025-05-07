@@ -9,6 +9,7 @@ class InquiriesBase(BaseModel):
     student_request : str
     student_direct : str
     student_confirm : str
+    page : str
 
 
 class InquiriesCreate(InquiriesBase):

@@ -19,6 +19,8 @@ class Informations2(Base):
     title_tr = Column(String, nullable=True)
     information_tr = Column(Text, nullable=True)
 
+    page = Column(String(50), nullable=True)
+
     video_url = Column(String, nullable=True)
     status = Column(Boolean, default=True)
     date = Column(Date(), nullable=True, default=func.now())

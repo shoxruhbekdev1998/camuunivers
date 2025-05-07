@@ -45,6 +45,7 @@ def add_menus(form, db):
         name_en=form.name_en,
         name_ru=form.name_ru,
         name_tr=form.name_tr,
+        page=form.page,
     )
 
     db.add(new_menu)
@@ -64,6 +65,7 @@ def update_menus(id, form, db):
         Menus.name_en: form.name_en,
         Menus.name_ru: form.name_ru,
         Menus.name_tr: form.name_tr,
+        Menus.page: form.page,
         Menus.status: form.status,
     })
     db.commit()

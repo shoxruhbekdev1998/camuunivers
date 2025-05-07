@@ -23,6 +23,8 @@ class Informations(Base):
     video_url = Column(String, nullable=True)
     status = Column(Boolean, default=True)
     date = Column(DateTime, server_default=func.now())
+
+    page = Column(String(50), nullable=True)
     
     # Rasm fayllarining yo'llari uchun 6 ta ustun
     photo1 = Column(String, nullable=True)

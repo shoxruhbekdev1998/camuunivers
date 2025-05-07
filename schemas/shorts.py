@@ -9,6 +9,7 @@ class ShortBase(BaseModel):
     shorts_ru: Optional[str]
     shorts_tr: Optional[str]
     shorts_link: Optional[str]
+    page : str
     status: bool
 
 

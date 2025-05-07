@@ -27,6 +27,7 @@ async def create_info(
     information_tr: Optional[str] = Form(None),
     video_url: Optional[str] = Form(None),
     category2_id : int = Form(None),
+    page: Optional[str] = Form(None),
     photo1: Optional[UploadFile] = File(None),
     photo2: Optional[UploadFile] = File(None),
     photo3: Optional[UploadFile] = File(None),
@@ -46,6 +47,7 @@ async def create_info(
         information_tr=information_tr,
         video_url=video_url,
         category2_id=category2_id,
+        page=page
     )
     return create_information2(
         db=db,
@@ -94,6 +96,7 @@ async def update_info(
     information_tr: Optional[str] = Form(None),
     video_url: Optional[str] = Form(None),
     category2_id : int = Form(None),
+    page: Optional[str] = Form(None),
     photo1: Optional[UploadFile] = File(None),
     photo2: Optional[UploadFile] = File(None),
     photo3: Optional[UploadFile] = File(None),
@@ -114,6 +117,7 @@ async def update_info(
         information_tr=information_tr,
         video_url=video_url,
         category2_id=category2_id,
+        page=page
     )
     return update_information2(
         id=id,

@@ -36,8 +36,14 @@ def all_numbers(search,id,from_date,end_date,page,limit,db,status):
 
 
 def add_numbers(form,db):
-    new_number=Numbers(number_of_buildings=form.number_of_buildings,)
-    db.add(next)
+    new_number=Numbers(number_of_buildings=form.number_of_buildings,
+                       number_of_specialties=form.number_of_specialties,
+                       number_of_students=form.number_of_students,
+                       number_of_teachers=form.number_of_teachers,
+                       number_of_clinics=form.number_of_clinics,
+                       number_of_labaratories=form.number_of_labaratories,
+                       page = form.page,)
+    db.add(new_number)
     db.commit()
     db.refresh(new_number)
 
@@ -53,6 +59,8 @@ def update_numbers(id,form,db):
         Numbers.number_of_teachers:form.number_of_teachers,
         Numbers.number_of_clinics:form.number_of_clinics,
         Numbers.number_of_labaratories:form.number_of_labaratories,
+        Numbers.page:form.page,
+
 
         Numbers.status:form.status,
 

@@ -45,6 +45,7 @@ def add_short(form: ShortCreate, db: Session):
         shorts_en=form.shorts_en,
         shorts_ru=form.shorts_ru,
         shorts_tr=form.shorts_tr,
+        page = form.page,
         shorts_link=form.shorts_link,
         status=form.status
     )
@@ -64,6 +65,7 @@ def update_short(id: int, form: ShortUpdate, db: Session):
         Shorts.shorts_en: form.shorts_en,
         Shorts.shorts_ru: form.shorts_ru,
         Shorts.shorts_tr: form.shorts_tr,
+        Shorts.page: form.page,
         Shorts.shorts_link: form.shorts_link,
         Shorts.status: form.status
     })

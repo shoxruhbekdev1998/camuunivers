@@ -43,6 +43,7 @@ def add_video(form: VideoCreate, db: Session):
         videos_en=form.videos_en,
         videos_ru=form.videos_ru,
         videos_tr=form.videos_tr,
+        page = form.page,
         videos_link=form.videos_link,
         status=form.status
     )
@@ -63,6 +64,7 @@ def update_video(id: int, form: VideoUpdate, db: Session):
         Videos.videos_en: form.videos_en,
         Videos.videos_ru: form.videos_ru,
         Videos.videos_tr: form.videos_tr,
+        Videos.page: form.page,
         Videos.videos_link: form.videos_link,
         Videos.status: form.status
     })

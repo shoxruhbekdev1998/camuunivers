@@ -14,6 +14,7 @@ class Information2Base(BaseModel):
 
     title_tr: Optional[str] = None
     information_tr: Optional[str] = None
+    page : str
 
     video_url: Optional[str] = None
     status: Optional[bool] = True

@@ -33,6 +33,7 @@ def create_partner(db: Session, data: PartnerCreate, file: Optional[UploadFile])
         partner_name=data.partner_name,
         partner_link=data.partner_link,
         logo=logo,
+        page =data.page,
         
     )
     db.add(partner)
@@ -60,6 +61,7 @@ def get_all_partners(db: Session, search: Optional[str] = None, status: Optional
             "id": p.id,
             "partner_name": p.partner_name,
             "partner_link": p.partner_link,
+            "page": p.page,
             "logo": clean_logo_path(p.logo),
             "status": p.status,
             "date": p.date
@@ -76,6 +78,7 @@ def update_partner(db: Session, data: PartnerUpdate, partner_id: int, file: Opti
 
     partner.partner_name = data.partner_name
     partner.partner_link = data.partner_link
+    partner.page = data.page
     
 
     if file:

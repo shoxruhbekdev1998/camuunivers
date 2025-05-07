@@ -16,8 +16,10 @@ class Numbers(Base):
     number_of_students= Column(Integer, nullable=True)
 
     number_of_teachers= Column(Integer, nullable=True)
-    number_of_clinicsb = Column(Integer, nullable=True)
+    number_of_clinics = Column(Integer, nullable=True)
     number_of_labaratories= Column(Integer, nullable=True)
+
+    page = Column(String(50), nullable=True)
     
     date = Column(Date(),nullable = True,default=func.now())
     status = Column(Boolean, nullable = True ,default=True)
