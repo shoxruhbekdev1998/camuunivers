@@ -7,6 +7,12 @@ from fastapi import UploadFile, HTTPException
 from typing import List, Optional
 from sqlalchemy import or_
 from utils.pagination import pagination
+from models.categories2 import Categories2
+from sqlalchemy import desc
+from typing import Optional, List
+from fastapi import UploadFile, HTTPException
+from uuid import uuid4
+
 # Faylni saqlash uchun katalogni yaratish
 UPLOAD_DIR = "static/uploads2"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
@@ -79,8 +85,8 @@ def get_all_informations2(search: str = None,
         informations2 = informations2.filter(Informations2.category2_id == category2_id)
 
     if from_date and end_date:
-        informations2 = informations2.filter(Informations2.created_at >= from_date,
-                                           Informations2.created_at <= end_date)
+        informations2 = informations2.filter(Informations2.date >= from_date,
+                                           Informations2.date <= end_date)
 
     if status is True:
         informations2 = informations2.filter(Informations2.status == True)
@@ -113,6 +119,76 @@ def get_all_informations2(search: str = None,
 
     result["data"] = formatted_data
     return result
+
+
+def get_selected_categories_with_latest_informations(
+    db: Session,
+    category_ids: Optional[List[int]] = None,
+    search: Optional[str] = None,
+    id: Optional[int] = None,
+    category_id: Optional[int] = None,
+    from_date: Optional[str] = None,
+    end_date: Optional[str] = None,
+    status: Optional[bool] = None,
+    limit: int = 3
+):
+    if not category_ids:
+        return []
+
+    categories = db.query(Categories2).filter(
+        Categories2.id.in_(category_ids),
+        Categories2.status == True
+    ).all()
+
+    result = []
+
+    for category in categories:
+        informations_query = db.query(Informations2).filter(
+            Informations2.category2_id == category.id
+        )
+
+        if status is True:
+            informations_query = informations_query.filter(Informations2.status == True)
+        elif status is False:
+            informations_query = informations_query.filter(Informations2.status == False)
+
+        if search:
+            informations_query = informations_query.filter(Informations2.title_uz.ilike(f"%{search}%"))
+
+        if id:
+            informations_query = informations_query.filter(Informations2.id == id)
+
+        if from_date and end_date:
+            informations_query = informations_query.filter(
+                Informations2.date >= from_date,
+                Informations2.date <= end_date
+            )
+
+        informations = informations_query.order_by(desc(Informations2.date)).limit(limit).all()
+
+        result.append({
+            "id": category.id,
+            "name_uz": category.name_uz,
+            "name_ru": category.name_ru,
+            "name_en": category.name_en,
+            "name_tr": category.name_tr,
+            "page": category.page,
+            "status": category.status,
+            "date": category.date.strftime("%Y-%m-%d") if category.date else None,
+            "category_id": category.category_id,
+            "informations2": [
+                {
+                    "id": info.id,
+                    "title_uz": info.title_uz,
+                    "photo": info.photo,
+                    "date": info.date.strftime("%Y-%m-%d %H:%M:%S") if info.date else None
+                }
+                for info in informations
+            ]
+        })
+
+    return result
+
 
 
 def update_information2(id: int, form: Information2Update, files: List[Optional[UploadFile]], db: Session):

@@ -3,6 +3,12 @@ from sqlalchemy.orm import Session
 from typing import List, Optional
 from fastapi import Query
 
+from fastapi import APIRouter, Depends, Query
+from sqlalchemy.orm import Session
+from typing import List, Optional
+from db import get_db
+from functions.informations2 import get_selected_categories_with_latest_informations
+
 from db import get_db
 from schemas.informations2 import Information2Create, Information2Update, Information2Out
 from functions.informations2 import (
@@ -80,6 +86,37 @@ def get_all_informations_route2(
         db=db,
         status=status
     )
+
+
+
+
+
+@router_information2.get("/informations2/by-categories")
+def get_categories_with_latest_informations_route(
+    category_ids: Optional[List[int]] = Query(None),
+    search: Optional[str] = None,
+    id: Optional[int] = None,
+    category_id: Optional[int] = None,
+    from_date: Optional[str] = None,
+    end_date: Optional[str] = None,
+    status: Optional[bool] = None,
+    limit: int = 3,
+    db: Session = Depends(get_db)
+):
+    return get_selected_categories_with_latest_informations(
+        db=db,
+        category_ids=category_ids,
+        search=search,
+        id=id,
+        category_id=category_id,
+        from_date=from_date,
+        end_date=end_date,
+        status=status,
+        limit=limit
+    )
+
+
+
 
 
 @router_information2.put("/", response_model=Information2Out)
