@@ -32,6 +32,12 @@ async def create_info(
     title_tr: Optional[str] = Form(None),
     information_tr: Optional[str] = Form(None),
     video_url: Optional[str] = Form(None),
+    tel_number: Optional[str] = Form(None),
+    email_link: Optional[str] = Form(None),
+    instagram_link: Optional[str] = Form(None),
+    telegram_link: Optional[str] = Form(None),
+    facebook_link: Optional[str] = Form(None),
+    twitter_link: Optional[str] = Form(None),
     category2_id : int = Form(None),
     page: Optional[str] = Form(None),
     photo1: Optional[UploadFile] = File(None),
@@ -52,6 +58,13 @@ async def create_info(
         title_tr=title_tr,
         information_tr=information_tr,
         video_url=video_url,
+        tel_number=tel_number,
+        email_link=email_link,
+        instagram_link=instagram_link,
+        telegram_link=telegram_link,
+        facebook_link=facebook_link,
+        twitter_link=twitter_link,
+
         category2_id=category2_id,
         page=page
     )
@@ -133,6 +146,13 @@ async def update_info(
     information_tr: Optional[str] = Form(None),
     video_url: Optional[str] = Form(None),
     category2_id : int = Form(None),
+    tel_number: Optional[str] = Form(None),
+    email_link: Optional[str] = Form(None),
+    instagram_link: Optional[str] = Form(None),
+    telegram_link: Optional[str] = Form(None),
+    facebook_link: Optional[str] = Form(None),
+    twitter_link: Optional[str] = Form(None),
+
     page: Optional[str] = Form(None),
     photo1: Optional[UploadFile] = File(None),
     photo2: Optional[UploadFile] = File(None),
@@ -153,6 +173,13 @@ async def update_info(
         title_tr=title_tr,
         information_tr=information_tr,
         video_url=video_url,
+        tel_number=tel_number,
+        email_link=email_link,
+        instagram_link=instagram_link,
+        telegram_link=telegram_link,
+        facebook_link=facebook_link,
+        twitter_link=twitter_link,
+
         category2_id=category2_id,
         page=page
     )

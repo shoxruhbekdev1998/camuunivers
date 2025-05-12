@@ -18,7 +18,14 @@ class Information2Base(BaseModel):
 
     video_url: Optional[str] = None
     status: Optional[bool] = True
-
+    tel_number: Optional[str] = None
+    email_link: Optional[str] = None
+    instagram_link: Optional[str] = None
+    telegram_link: Optional[str] = None
+    facebook_link: Optional[str] = None
+    twitter_link: Optional[str] = None
+    
+    
     category2_id : int
 
     photo1: Optional[str] = None

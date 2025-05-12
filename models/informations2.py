@@ -22,6 +22,14 @@ class Informations2(Base):
     page = Column(String(50), nullable=True)
 
     video_url = Column(String, nullable=True)
+
+    tel_number = Column(String, nullable=True)
+    email_link = Column(String, nullable=True)
+    instagram_link = Column(String, nullable=True)
+    telegram_link = Column(String, nullable=True)
+    facebook_link = Column(String, nullable=True)
+    twitter_link = Column(String, nullable=True)
+    
     status = Column(Boolean, default=True)
     date = Column(Date(), nullable=True, default=func.now())
 

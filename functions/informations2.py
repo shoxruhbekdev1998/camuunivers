@@ -48,6 +48,12 @@ def create_information2(db: Session, data: Information2Create, files: List[Optio
         information_tr=data.information_tr,
         page = data.page,
         video_url=data.video_url,
+        tel_number=data.tel_number,
+        email_link=data.email_link,
+        instagram_link=data.instagram_link,
+        telegram_link=data.telegram_link,
+        facebook_link=data.facebook_link,
+        twitter_link=data.twitter_link,
         category2_id = data.category2_id,
         status=True  # yoki kerakli default status
     )
@@ -111,6 +117,12 @@ def get_all_informations2(search: str = None,
             "information_tr": info.information_tr,
             "page": info.page,
             "video_url": info.video_url,
+            "tel_number": info.tel_number,
+            "email_link": info.email_link,
+            "instagram_link": info.instagram_link,
+            "telegram_link": info.telegram_link,
+            "facebook_link": info.facebook_link,
+            "twitter_link": info.twitter_link,
             "category2_id": info.category2_id,
             "status": info.status,
             "date": info.date,
@@ -119,6 +131,7 @@ def get_all_informations2(search: str = None,
 
     result["data"] = formatted_data
     return result
+
 
 
 def get_selected_categories_with_latest_informations(
@@ -180,14 +193,37 @@ def get_selected_categories_with_latest_informations(
                 {
                     "id": info.id,
                     "title_uz": info.title_uz,
-                    "photo": info.photo,
-                    "date": info.date.strftime("%Y-%m-%d %H:%M:%S") if info.date else None
+                    "information_uz": info.information_uz,
+                    "title_ru": info.title_ru,
+                    "information_ru": info.information_ru,
+                    "title_en": info.title_en,
+                    "information_en": info.information_en,
+                    "title_tr": info.title_tr,
+                    "information_tr": info.information_tr,
+                    "page": info.page,
+                    "video_url": info.video_url,
+                    "tel_number": info.tel_number,
+                    "email_link": info.email_link,
+                    "instagram_link": info.instagram_link,
+                    "telegram_link": info.telegram_link,
+                    "facebook_link": info.facebook_link,
+                    "twitter_link": info.twitter_link,
+                    "status": info.status,
+                    "date": info.date.strftime("%Y-%m-%d %H:%M:%S") if info.date else None,
+                    "photo1": info.photo1,
+                    "photo2": info.photo2,
+                    "photo3": info.photo3,
+                    "photo4": info.photo4,
+                    "photo5": info.photo5,
+                    "photo6": info.photo6,
+                    "category2_id": info.category2_id,
                 }
                 for info in informations
             ]
         })
 
     return result
+
 
 
 
@@ -211,6 +247,12 @@ def update_information2(id: int, form: Information2Update, files: List[Optional[
         Informations2.information_tr: form.information_tr,
         Informations2.page: form.page,
         Informations2.video_url: form.video_url,
+        Informations2.tel_number: form.tel_number,
+        Informations2.email_link: form.email_link,
+        Informations2.instagram_link: form.instagram_link,
+        Informations2.telegram_link: form.telegram_link,
+        Informations2.facebook_link: form.facebook_link,
+        Informations2.twitter_link: form.twitter_link,
         Informations2.category2_id: form.category2_id,
         Informations2.status: form.status,
     }
