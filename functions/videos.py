@@ -13,9 +13,13 @@ def all_videos(search=None, id=None, from_date=None, end_date=None, page: int = 
         videos = videos.filter(
             or_(
                 Videos.videos_uz.ilike(f"%{search}%"),
+                Videos.description_uz.ilike(f"%{search}%"),
                 Videos.videos_en.ilike(f"%{search}%"),
+                Videos.description_en.ilike(f"%{search}%"),
                 Videos.videos_ru.ilike(f"%{search}%"),
-                Videos.videos_tr.ilike(f"%{search}%")
+                Videos.description_ru.ilike(f"%{search}%"),
+                Videos.videos_tr.ilike(f"%{search}%"),
+                Videos.description_tr.ilike(f"%{search}%"),
             )
         )
 
@@ -40,9 +44,13 @@ def add_video(form: VideoCreate, db: Session):
 
     new_video = Videos(
         videos_uz=form.videos_uz,
+        description_uz=form.description_uz,
         videos_en=form.videos_en,
+        description_en=form.description_en,
         videos_ru=form.videos_ru,
+        description_ru=form.description_ru,
         videos_tr=form.videos_tr,
+        description_tr=form.description_tr,
         page = form.page,
         videos_link=form.videos_link,
         status=form.status
@@ -61,9 +69,13 @@ def update_video(id: int, form: VideoUpdate, db: Session):
 
     db.query(Videos).filter(Videos.id == id).update({
         Videos.videos_uz: form.videos_uz,
+        Videos.description_uz: form.description_uz,
         Videos.videos_en: form.videos_en,
+        Videos.description_en: form.description_en,
         Videos.videos_ru: form.videos_ru,
+        Videos.description_ru: form.description_ru,
         Videos.videos_tr: form.videos_tr,
+        Videos.description_tr: form.description_tr,
         Videos.page: form.page,
         Videos.videos_link: form.videos_link,
         Videos.status: form.status

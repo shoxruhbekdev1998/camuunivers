@@ -12,9 +12,14 @@ class Videos(Base):
     id = Column(Integer, primary_key=True,autoincrement=True)
 
     videos_uz = Column(String(500), nullable=True)
+    description_uz = Column(String(500), nullable=True)
     videos_en = Column(String(500), nullable=True)
+    description_en = Column(String(500), nullable=True)
     videos_ru = Column(String(500), nullable=True)
+    description_ru = Column(String(500), nullable=True)
     videos_tr = Column(String(500), nullable=True)
+    description_tr = Column(String(500), nullable=True)
+
     
     videos_link = Column(String,nullable=True)
 
