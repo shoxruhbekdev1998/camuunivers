@@ -57,16 +57,19 @@ def create_information(db: Session, data: InformationCreate, files: List[Optiona
     return info
 
 
-def get_all_informations(search: str = None,
-                         id: int = None,
-                         category_id: int = None,
-                         from_date: str = None,
-                         end_date: str = None,
-                         page: int = 1,
-                         limit: int = 10,
-                         db: Session = None,
-                         status: bool = None):
-    
+
+
+def get_all_informations(
+    search: str = None,
+    id: int = None,
+    category_id: int = None,
+    from_date: str = None,
+    end_date: str = None,
+    page: int = 1,
+    limit: int = 10,
+    db: Session = None,
+    status: bool = None
+):
     informations = db.query(Informations).filter(Informations.id >= 0)
 
     if search:
@@ -75,13 +78,14 @@ def get_all_informations(search: str = None,
     if id:
         informations = informations.filter(Informations.id == id)
 
-
     if category_id:
         informations = informations.filter(Informations.category_id == category_id)
 
     if from_date and end_date:
-        informations = informations.filter(Informations.created_at >= from_date,
-                                           Informations.created_at <= end_date)
+        informations = informations.filter(
+            Informations.created_at >= from_date,
+            Informations.created_at <= end_date
+        )
 
     if status is True:
         informations = informations.filter(Informations.status == True)
@@ -90,10 +94,15 @@ def get_all_informations(search: str = None,
 
     result = pagination(form=informations, page=page, limit=limit)
 
-    # Ma'lumotlarni formatlash (rasmlar va boshqa ustunlar)
+    # Ma'lumotlarni formatlash
     formatted_data = []
     for info in result["data"]:
-        photos = {f"photo{i+1}": clean_path(getattr(info, f"photo{i+1}")) for i in range(6)}
+        photos = {
+            f"photo{i+1}": clean_path(getattr(info, f"photo{i+1}"))
+            for i in range(6)
+            if getattr(info, f"photo{i+1}") is not None
+        }
+
         formatted_data.append({
             "id": info.id,
             "title_uz": info.title_uz,
@@ -109,11 +118,12 @@ def get_all_informations(search: str = None,
             "page": info.page,
             "status": info.status,
             "date": info.date,
-            **photos
+            "photos": photos  # Rasmlar bitta lug‘at ichida
         })
 
     result["data"] = formatted_data
     return result
+
 
 
 # Ma'lumotni yangilash

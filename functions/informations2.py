@@ -69,16 +69,17 @@ def create_information2(db: Session, data: Information2Create, files: List[Optio
     return info
 
 
-def get_all_informations2(search: str = None,
-                         id: int = None,
-                         category2_id : int = None,
-                         from_date: str = None,
-                         end_date: str = None,
-                         page: int = 1,
-                         limit: int = 10,
-                         db: Session = None,
-                         status: bool = None):
-    
+def get_all_informations2(
+    search: str = None,
+    id: int = None,
+    category2_id: int = None,
+    from_date: str = None,
+    end_date: str = None,
+    page: int = 1,
+    limit: int = 10,
+    db: Session = None,
+    status: bool = None
+):
     informations2 = db.query(Informations2).filter(Informations2.id >= 0)
 
     if search:
@@ -91,8 +92,10 @@ def get_all_informations2(search: str = None,
         informations2 = informations2.filter(Informations2.category2_id == category2_id)
 
     if from_date and end_date:
-        informations2 = informations2.filter(Informations2.date >= from_date,
-                                           Informations2.date <= end_date)
+        informations2 = informations2.filter(
+            Informations2.date >= from_date,
+            Informations2.date <= end_date
+        )
 
     if status is True:
         informations2 = informations2.filter(Informations2.status == True)
@@ -101,10 +104,14 @@ def get_all_informations2(search: str = None,
 
     result = pagination(form=informations2, page=page, limit=limit)
 
-    # Ma'lumotlarni formatlash (rasmlar va boshqa ustunlar)
     formatted_data = []
     for info in result["data"]:
-        photos = {f"photo{i+1}": clean_path(getattr(info, f"photo{i+1}")) for i in range(6)}
+        photos = {
+            f"photo{i+1}": clean_path(getattr(info, f"photo{i+1}"))
+            for i in range(6)
+            if getattr(info, f"photo{i+1}") is not None
+        }
+
         formatted_data.append({
             "id": info.id,
             "title_uz": info.title_uz,
@@ -126,11 +133,12 @@ def get_all_informations2(search: str = None,
             "category2_id": info.category2_id,
             "status": info.status,
             "date": info.date,
-            **photos
+            "photos": photos  # Rasmlar alohida lug'at ichida
         })
 
     result["data"] = formatted_data
     return result
+
 
 
 
@@ -210,19 +218,41 @@ def get_selected_categories_with_latest_informations(
                     "twitter_link": info.twitter_link,
                     "status": info.status,
                     "date": info.date.strftime("%Y-%m-%d %H:%M:%S") if info.date else None,
-                    "photo1": info.photo1,
-                    "photo2": info.photo2,
-                    "photo3": info.photo3,
-                    "photo4": info.photo4,
-                    "photo5": info.photo5,
-                    "photo6": info.photo6,
                     "category2_id": info.category2_id,
+                    "photos": {
+                        f"photo{i+1}": clean_path(getattr(info, f"photo{i+1}"))
+                        for i in range(6)
+                        if getattr(info, f"photo{i+1}") is not None
+                    }
                 }
                 for info in informations
             ]
         })
 
     return result
+
+def get_latest_photos_filled(db: Session):
+    all_infos = db.query(Informations2).filter(Informations2.status == True).order_by(desc(Informations2.date)).all()
+
+    photos = []
+    for info in all_infos:
+        for i in range(6):
+            photo = getattr(info, f"photo{i+1}")
+            if photo:
+                cleaned = clean_path(photo)
+                if cleaned not in photos:
+                    photos.append(cleaned)
+            if len(photos) == 6:
+                break
+        if len(photos) == 6:
+            break
+
+    return {
+        "photos": {f"photo{i+1}": photos[i] if i < len(photos) else None for i in range(6)},
+        "total_filled": len(photos),
+        "source_count": len(all_infos)
+    }
+
 
 
 

@@ -7,7 +7,7 @@ from fastapi import APIRouter, Depends, Query
 from sqlalchemy.orm import Session
 from typing import List, Optional
 from db import get_db
-from functions.informations2 import get_selected_categories_with_latest_informations
+from functions.informations2 import get_latest_photos_filled, get_selected_categories_with_latest_informations
 
 from db import get_db
 from schemas.informations2 import Information2Create, Information2Update, Information2Out
@@ -129,7 +129,10 @@ def get_categories_with_latest_informations_route(
     )
 
 
-
+@router_information2.get("/latest-6-photos")
+def latest_6_photos(db: Session = Depends(get_db)):
+    result = get_latest_photos_filled(db)
+    return result
 
 
 @router_information2.put("/", response_model=Information2Out)
