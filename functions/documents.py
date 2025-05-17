@@ -46,8 +46,6 @@ def add_document(form,db):
         number_school=form.number_school,
         student_number1=form.student_number1,
         student_number2=form.student_number2,
-        card_number=form.card_number,
-        card_pnfl=form.card_pnfl,
         student_confirm=form.student_confirm,
         
         student_direct=form.student_direct,
@@ -76,8 +74,6 @@ def update_document(id, form, db):
         Documents.number_school: form.number_school,
         Documents.student_number1: form.student_number1,
         Documents.student_number2: form.student_number2,
-        Documents.card_number: form.card_number,
-        Documents.card_pnfl: form.card_pnfl,
         Documents.student_confirm: form.student_confirm,
         Documents.status: form.status
     })

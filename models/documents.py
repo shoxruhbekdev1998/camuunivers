@@ -23,10 +23,7 @@ class Documents(Base):
 
     student_number1 = Column(String(50), nullable=True)
     student_number2 = Column(String(50), nullable=True)
-
-    card_number = Column(String(50), nullable=True)
-    card_pnfl = Column(String(50), nullable=True)
-
+    
     student_confirm = Column(String(50), default=True)
 
 

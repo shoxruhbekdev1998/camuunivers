@@ -16,6 +16,10 @@ class BotBase(BaseModel):
     card_pnfl: Optional[str]
     student_direct: Optional[str]
     student_request: Optional[str]
+
+    tg_id: Optional[str]
+    tg_username: Optional[str]
+    tg_full_name: Optional[str]
    
 
 class BotCreate(BotBase):

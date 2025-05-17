@@ -50,6 +50,9 @@ def add_bot(form,db):
         card_pnfl=form.card_pnfl,
         student_direct=form.student_direct,
         student_request=form.student_request,
+        tg_id=form.tg_id,
+        tg_username=form.tg_username,
+        tg_full_name=form.tg_full_name,
        
     )
     db.add(new_bot)
@@ -78,6 +81,9 @@ def update_bot(id, form, db):
         Bots.card_pnfl: form.card_pnfl,
         Bots.student_direct: form.student_direct,
         Bots.student_request: form.student_request,
+        Bots.tg_id: form.tg_id,
+        Bots.tg_username: form.tg_username,
+        Bots.tg_full_name: form.tg_full_name,
         Bots.status: form.status
     })
     db.commit()

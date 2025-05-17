@@ -31,6 +31,9 @@ class Bots(Base):
     student_direct = Column(String(50), default=True)  # yo'nalishlarni tanlay oladi
     student_request = Column(String(300), nullable=True) #savollar bera oladi
     
+    tg_id = Column(String(200), nullable=True)
+    tg_username = Column(String(200), nullable=True)
+    tg_full_name = Column(String(200), nullable=True)
     
     date = Column(Date(),nullable = True,default=func.now())
     status = Column(Boolean, nullable = True ,default=True)

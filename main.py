@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from models import categories, categories2, for_inquiries, informations, informations2, menus, numbers, partners, users, journals, shorts, videos, bot_api, documents
-from routes import auth, informations2, numbers, users, menus, categories, categories2, informations, for_inquiriens,partners, journals, shorts, videos, bot_api, documents
+from models import categories, categories2, for_inquiries, informations, informations2, menus, numbers, partners, users, journals, shorts, videos, bot_api, documents, for_international
+from routes import auth, informations2, numbers, users, menus, categories, categories2, informations, for_inquiriens,partners, journals, shorts, videos, bot_api, documents, for_international
 
 from db import Base, engine
 
@@ -132,4 +132,12 @@ app.include_router(
     documents.router_document,
     prefix="/Documents",
     tags=['Documents section']
+)
+
+
+#International
+app.include_router(
+    for_international.router_international,
+    prefix="/International",
+    tags=['International section']
 )

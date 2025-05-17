@@ -1,21 +1,22 @@
 from pydantic import BaseModel
 from typing import Optional,List
 
-class InquiriesBase(BaseModel):
+class InternationalBase(BaseModel):
     student_name : str
     student_surname : str
-    student_number : str
-    student_number1 : str
-
+    student_middle_name : str
+    student_coutry : str
+    student_email : str
     student_request : str
     student_direct : str
+    
     student_confirm : str
     page : str
 
 
-class InquiriesCreate(InquiriesBase):
+class InternationalCreate(InternationalBase):
     pass
 
-class InquiriesUpdate(InquiriesBase):
+class InternationalUpdate(InternationalBase):
     id:int
     status:bool

@@ -12,8 +12,6 @@ class DocumentBase(BaseModel):
     number_school: Optional[str]
     student_number1: Optional[str]
     student_number2: Optional[str]
-    card_number: Optional[str]
-    card_pnfl: Optional[str]
     student_confirm: Optional[str]
 
 
