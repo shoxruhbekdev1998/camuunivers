@@ -33,9 +33,9 @@ def all_internationals(search, id, from_date, end_date, page, limit, db, status)
 
 
 def add_internationals(form,db):
-    internationals= db.query(Internationals).filter(Internationals.id==form.id).first()
+    internationals= db.query(Internationals).filter(Internationals.student_email==form.student_email).first()
     if internationals:
-        raise HTTPException(status_code=400,detail="Bunday nomli foydalanuvchi mavjud qayta kiriting !")
+        raise HTTPException(status_code=400,detail="Bunday emaildagi foydalanuvchi mavjud qayta kiriting !")
     new_internationals=Internationals(student_name=form.student_name,
                             student_surname=form.student_surname,
                             student_middle_name=form.student_middle_name,

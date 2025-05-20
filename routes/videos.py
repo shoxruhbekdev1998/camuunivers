@@ -10,7 +10,7 @@ from schemas.users import UserCurrent
 router_videos = APIRouter()
 
 
-@router_videos.post('/add', status_code=201)
+@router_videos.post('/video_add_from_admin', status_code=201)
 def add_video_route(
     form: VideoCreate,
     db: Session = Depends(get_db),
@@ -21,7 +21,7 @@ def add_video_route(
         return {"detail": "Video muvaffaqiyatli qo‘shildi", "id": result["id"]}
 
 
-@router_videos.get('/', status_code=200)
+@router_videos.get('/get', status_code=200)
 def get_videos(
     search: str = None,
     id: int = 0,
@@ -45,7 +45,7 @@ def get_videos(
     )
 
 
-@router_videos.put('/update', status_code=200)
+@router_videos.put('/video_update_from_admin', status_code=200)
 def update_video_route(
     form: VideoUpdate,
     db: Session = Depends(get_db),
@@ -59,7 +59,7 @@ def update_video_route(
         return {"detail": "Video muvaffaqiyatli yangilandi"}
 
 
-@router_videos.delete('/delete', status_code=200)
+@router_videos.delete('/video_add_from_admin', status_code=200)
 def delete_video_route(
     id: int,
     db: Session = Depends(get_db),

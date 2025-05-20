@@ -21,7 +21,7 @@ from functions.informations2 import (
 router_information2 = APIRouter()
 
 
-@router_information2.post("/", response_model=Information2Out)
+@router_information2.post("/information2_add_from_admin", response_model=Information2Out)
 async def create_info(
     title_uz: Optional[str] = Form(None),
     information_uz: Optional[str] = Form(None),
@@ -76,7 +76,7 @@ async def create_info(
 
 
 
-@router_information2.get("/")
+@router_information2.get("/get")
 def get_all_informations_route2(
     search: str = None,
     id: int = None,
@@ -135,7 +135,7 @@ def latest_6_photos(db: Session = Depends(get_db)):
     return result
 
 
-@router_information2.put("/", response_model=Information2Out)
+@router_information2.put("/information2_update_from_admin", response_model=Information2Out)
 async def update_info(
     id: int = Form(...),
     status: bool = Form(...),
@@ -195,7 +195,7 @@ async def update_info(
 
 
 
-@router_information2.delete("/{info_id}")
+@router_information2.delete("/information2_delete_from_admin{info_id}")
 def delete_info(info_id: int, db: Session = Depends(get_db)):
     success = delete_information2(db, info_id)
     return {"success": success}

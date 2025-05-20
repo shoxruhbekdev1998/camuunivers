@@ -10,7 +10,7 @@ from functions.shorts import add_short, all_shorts, update_short, delete_short
 router_shorts = APIRouter()
 
 
-@router_shorts.post('/add')
+@router_shorts.post('/short_add_from_admin')
 def create_short(
     form: ShortCreate,
     db: Session = Depends(get_db),
@@ -21,7 +21,7 @@ def create_short(
         return {"detail": "Short muvaffaqiyatli qo'shildi"}
 
 
-@router_shorts.get('/', status_code=200)
+@router_shorts.get('/get', status_code=200)
 def get_shorts(
     search: str = None,
     id: int = 0,
@@ -45,7 +45,7 @@ def get_shorts(
     )
 
 
-@router_shorts.put('/update')
+@router_shorts.put('/short_update_from_admin')
 def update_short_data(
     form: ShortUpdate,
     db: Session = Depends(get_db),
@@ -59,7 +59,7 @@ def update_short_data(
         return {"detail": "Short muvaffaqiyatli yangilandi"}
 
 
-@router_shorts.delete('/del')
+@router_shorts.delete('/short_delete_from_admin')
 def delete_short_data(
     id: int,
     db: Session = Depends(get_db),

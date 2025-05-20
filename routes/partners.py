@@ -14,7 +14,7 @@ from functions.partners import (
 router_partner = APIRouter()
 
 
-@router_partner.post("/", response_model=PartnerOut)
+@router_partner.post("/partner_add_from_admin", response_model=PartnerOut)
 async def create_partner_route(
     partner_name: str = Form(None),
     partner_link: str = Form(None),
@@ -32,7 +32,7 @@ async def create_partner_route(
     return create_partner(db=db, data=data, file=partner_logo)
 
 
-@router_partner.get("/")
+@router_partner.get("/get")
 def get_partners_route(
     search: Optional[str] = None,
     status: Optional[bool] = None,
@@ -49,7 +49,7 @@ def get_partners_route(
     )
 
 
-@router_partner.put("/", response_model=PartnerOut)
+@router_partner.put("/partner_update_from_admin", response_model=PartnerOut)
 async def update_partner_route(
     id: int = Form(...),
     partner_name: str = Form(None),
@@ -68,7 +68,7 @@ async def update_partner_route(
     return update_partner(db=db, data=data, partner_id=id, file=partner_logo)
 
 
-@router_partner.delete("/{partner_id}")
+@router_partner.delete("/partner_delete_from_admin{partner_id}")
 def delete_partner_route(partner_id: int, db: Session = Depends(get_db)):
     success = delete_partner(db=db, partner_id=partner_id)
     return {"success": success}

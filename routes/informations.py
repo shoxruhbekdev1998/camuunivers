@@ -15,7 +15,7 @@ from functions.informations import (
 router_information = APIRouter()
 
 
-@router_information.post("/", response_model=InformationOut)
+@router_information.post("/information_add_from_admin", response_model=InformationOut)
 async def create_info(
     title_uz: Optional[str] = Form(None),
     information_uz: Optional[str] = Form(None),
@@ -57,7 +57,7 @@ async def create_info(
 
 
 
-@router_information.get("/")
+@router_information.get("/get")
 def get_all_informations_route(
     search: str = None,
     id: int = None,
@@ -82,7 +82,7 @@ def get_all_informations_route(
     )
 
 
-@router_information.put("/", response_model=InformationOut)
+@router_information.put("/information_update_from_admin", response_model=InformationOut)
 async def update_info(
     id: int = Form(...),
     status: bool = Form(...),
@@ -127,7 +127,7 @@ async def update_info(
     )
 
 
-@router_information.delete("/{info_id}")
+@router_information.delete("/information2_delete_from_admin{info_id}")
 def delete_info(info_id: int, db: Session = Depends(get_db)):
     success = delete_information(db, info_id)
     return {"success": success}

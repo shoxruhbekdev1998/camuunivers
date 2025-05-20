@@ -8,7 +8,7 @@ from functions.journals import create_journal, get_all_journals, update_journal,
 router_journals = APIRouter()
 
 # ✅ CREATE
-@router_journals.post("/", response_model=JournalOut)
+@router_journals.post("/journal_add_from_admin", response_model=JournalOut)
 async def create_journal_route(
     title_uz: str = Form(None),
     description_uz: str = Form(None),
@@ -40,7 +40,7 @@ async def create_journal_route(
 
 
 # ✅ GET ALL
-@router_journals.get("/")
+@router_journals.get("/get")
 def get_all_journals_route(
     search: Optional[str] = None,
     page: int = 1,
@@ -51,7 +51,7 @@ def get_all_journals_route(
 
 
 # ✅ UPDATE
-@router_journals.put("/", response_model=JournalOut)
+@router_journals.put("/journal_update_from_admin", response_model=JournalOut)
 async def update_journal_route(
     id: int = Form(...),
     title_uz: Optional[str] = Form(None),
@@ -84,7 +84,7 @@ async def update_journal_route(
 
 
 # ✅ DELETE
-@router_journals.delete("/{journal_id}")
+@router_journals.delete("/journal_delete_from_admin{journal_id}")
 def delete_journal_route(journal_id: int, db: Session = Depends(get_db)):
     success = delete_journal(db=db, journal_id=journal_id)
     if not success:

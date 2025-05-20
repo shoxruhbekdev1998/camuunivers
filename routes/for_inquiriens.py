@@ -14,27 +14,27 @@ from schemas.for_inquiries import *
 
 router_inquire = APIRouter()
 
-@router_inquire.post('/add')
+@router_inquire.post('/for_inquire_add_from_admin')
 def add_inquire(form:InquiriesCreate,db: Session = Depends(get_db),current_user: UserCurrent = Depends(get_current_active_user)):
 
     if add_inquiries(form=form,db=db):
         raise HTTPException(status_code=200, detail="Amaliyot muvofaqqiyatli bajarildi")
 
 
-@router_inquire.get('/',status_code=200)
+@router_inquire.get('/get',status_code=200)
 def get_inquire(search:str=None,id:int=0,from_date:str=None,end_date:str=None,page:int=1,limit:int=5,status:bool=None,db: Session = Depends(get_db),current_user: UserCurrent = Depends(get_current_active_user)):
 
         return all_inquiries(db=db,status=status,search=search,id=id,from_date=from_date,end_date=end_date,page=page,limit=limit)
 
 
 
-@router_inquire.put('/update',)
+@router_inquire.put('/for_inquire_update_from_admin',)
 def update_inquire(form:InquiriesUpdate,db: Session = Depends(get_db),current_user: UserCurrent = Depends(get_current_active_user)):
 
     if update_inquiries(id=form.id,form=form,db=db):
         raise HTTPException(status_code=200, detail="Amaliyot muvofaqqiyatli bajarildi")
 
-@router_inquire.delete('/del',)
+@router_inquire.delete('/for_inquire_delete_from_admin',)
 def delete_inquire(id:int,db: Session = Depends(get_db),current_user: UserCurrent = Depends(get_current_active_user)):
     return delete_inquiries(id=id,db=db)
 

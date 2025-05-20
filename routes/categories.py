@@ -14,27 +14,27 @@ from schemas.categories import *
 
 router_category = APIRouter()
 
-@router_category.post('/add')
+@router_category.post('/category_add_from_admin')
 def add_category(form:CategoriesCreate,db: Session = Depends(get_db),current_user: UserCurrent = Depends(get_current_active_user)):
 
     if add_categories(form=form,db=db):
         raise HTTPException(status_code=200, detail="Amaliyot muvofaqqiyatli bajarildi")
 
 
-@router_category.get('/',status_code=200)
+@router_category.get('/get',status_code=200)
 def get_category(search:str=None,id:int=0,menu_id:int=0,from_date:str=None,end_date:str=None,page:int=1,limit:int=5,status:bool=None,db: Session = Depends(get_db),current_user: UserCurrent = Depends(get_current_active_user)):
 
         return all_categories(db=db,status=status,search=search,id=id,menu_id=menu_id,from_date=from_date,end_date=end_date,page=page,limit=limit)
 
 
 
-@router_category.put('/update',)
+@router_category.put('/category_update_from_admin',)
 def update_category(form:CategoriesUpdate,db: Session = Depends(get_db),current_user: UserCurrent = Depends(get_current_active_user)):
 
     if update_categories(id=form.id,form=form,db=db):
         raise HTTPException(status_code=200, detail="Amaliyot muvofaqqiyatli bajarildi")
 
-@router_category.delete('/del',)
+@router_category.delete('/category_delete_from_admin',)
 def delete_category(id:int,db: Session = Depends(get_db),current_user: UserCurrent = Depends(get_current_active_user)):
     return delete_categories(id=id,db=db)
 

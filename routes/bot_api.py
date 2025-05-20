@@ -14,27 +14,27 @@ from schemas.bot_api import *
 
 router_bot = APIRouter()
 
-@router_bot.post('/add')
+@router_bot.post('/bot_add_from_admin')
 def add_bots(form:BotCreate,db: Session = Depends(get_db),current_user: UserCurrent = Depends(get_current_active_user)):
 
     if add_bot(form=form,db=db):
         raise HTTPException(status_code=200, detail="Amaliyot muvofaqqiyatli bajarildi")
 
 
-@router_bot.get('/',status_code=200)
+@router_bot.get('/get',status_code=200)
 def get_bots(search:str=None,id:int=0,from_date:str=None,end_date:str=None,page:int=1,limit:int=5,status:bool=None,db: Session = Depends(get_db),current_user: UserCurrent = Depends(get_current_active_user)):
 
         return all_bots(db=db,status=status,search=search,id=id,from_date=from_date,end_date=end_date,page=page,limit=limit)
 
 
 
-@router_bot.put('/update',)
+@router_bot.put('/bot_update_from_admin',)
 def update_bots(form:BotUpdate,db: Session = Depends(get_db),current_user: UserCurrent = Depends(get_current_active_user)):
 
     if update_bot(id=form.id,form=form,db=db):
         raise HTTPException(status_code=200, detail="Amaliyot muvofaqqiyatli bajarildi")
 
-@router_bot.delete('/del',)
+@router_bot.delete('/bot_delete_from_admin',)
 def delete_bots(id:int,db: Session = Depends(get_db),current_user: UserCurrent = Depends(get_current_active_user)):
     return delete_bot(id=id,db=db)
 
